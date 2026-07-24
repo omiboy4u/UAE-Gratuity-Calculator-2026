@@ -11,68 +11,82 @@
 
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 420px; width: 100%; position: relative;}
-        h2 { text-align: center; color: #2c3e50; margin-bottom: 20px; }
-        label { font-weight: 600; color: #34495e; display: block; margin-top: 15px; margin-bottom: 5px; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
-        button { width: 100%; background: #27ae60; color: white; border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 6px; margin-top: 20px; cursor: pointer; }
+        body { background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 400px; width: 100%; position: relative;}
+        h2 { text-align: center; color: #2c3e50; margin-top: 0; margin-bottom: 15px; font-size: 22px; }
+        label { font-weight: 600; color: #34495e; display: block; margin-top: 12px; margin-bottom: 4px; font-size: 14px; }
+        input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+        button { width: 100%; background: #27ae60; color: white; border: none; padding: 10px; font-size: 15px; font-weight: bold; border-radius: 6px; margin-top: 15px; cursor: pointer; }
         button:hover { background: #219150; }
-        .result-box { margin-top: 20px; padding: 15px; background: #e8f8f5; border: 1px solid #a3e4d7; border-radius: 6px; text-align: center; }
-        .result-amount { font-size: 24px; font-weight: bold; color: #27ae60; margin-top: 5px; }
+        
+        .result-box { margin-top: 15px; padding: 10px; background: #e8f8f5; border: 1px solid #a3e4d7; border-radius: 6px; text-align: center; }
+        .result-amount { font-size: 22px; font-weight: bold; color: #27ae60; margin-top: 3px; }
 
-        /* Currency Rates "Temptation" Box Styles */
+        /* Compact Currency Box */
         .currency-box {
             display: block;
             text-decoration: none;
-            margin-top: 25px;
-            padding: 15px;
-            border: 2px solid #e74c3c;
+            margin-top: 18px;
+            padding: 10px;
+            border: 1.5px solid #e74c3c;
             background-color: #fcf3f2;
             border-radius: 8px;
             text-align: center;
             color: #333;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
+            transition: background-color 0.2s ease;
         }
         .currency-box:hover {
             background-color: #f9e1e0;
-            border-color: #c0392b;
         }
         .currency-main-text {
-            font-size: 17px;
+            font-size: 14px;
             font-weight: bold;
             color: #c0392b;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 6px;
+            margin-bottom: 8px;
         }
         .rate-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            font-size: 14px;
-        }
-        .rate-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             gap: 6px;
-            background: rgba(255,255,255,0.7);
-            padding: 6px;
-            border-radius: 4px;
         }
-        .rate-arrow {
-            font-weight: bold;
+        .rate-card {
+            background: #ffffff;
+            padding: 6px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .rate-info {
+            font-size: 12px;
+            font-weight: 600;
+            color: #444;
         }
         .rate-up { color: #27ae60; }
         .rate-down { color: #e74c3c; }
 
+        /* Converted Gratuity Value Box */
+        .converted-val {
+            font-size: 12px;
+            font-weight: bold;
+            color: #27ae60;
+            margin-top: 3px;
+            background: #e8f8f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            width: 100%;
+            text-align: center;
+        }
+
         .faint-ad-links {
             display: flex;
             justify-content: space-around;
-            margin-top: 20px;
+            margin-top: 15px;
             font-size: 11px;
             color: #bdc3c7;
         }
@@ -92,34 +106,51 @@
     <button onclick="calculateGratuity()">Calculate Estimate</button>
 
     <div class="result-box" id="resultBox" style="display:none;">
-        <div>Estimated Gratuity Pay:</div>
+        <div style="font-size: 13px;">Estimated Gratuity Pay:</div>
         <div class="result-amount" id="gratuityResult">0 AED</div>
     </div>
 
-    <!-- Currency Rates "Temptation" Link Box (Replacing Coffee Link) -->
+    <!-- Currency Rates & Live Value Converter Box -->
     <a href="https://omiboy4u.github.io/UAE-Currency-Gold-Converter/" class="currency-box">
         <div class="currency-main-text">
             <span>🔀</span> Check Today's Live Currency Rates!
         </div>
         <div class="rate-grid">
-            <!-- Illustrative rates based on design trends -->
-            <div class="rate-item">🇮🇳 INR: 22.85 <span class="rate-arrow rate-up">↑</span></div>
-            <div class="rate-item">🇳🇵 NPR: 31.42 <span class="rate-arrow rate-down">↓</span></div>
-            <div class="rate-item">🇵🇭 PHP: 14.99 <span class="rate-arrow rate-up">↑</span></div>
-            <div class="rate-item">🇵🇰 PKR: 24.35 <span class="rate-arrow rate-up">↑</span></div>
+            <div class="rate-card">
+                <div class="rate-info">🇮🇳 INR: 22.85 <span class="rate-up">↑</span></div>
+                <div class="converted-val" id="inrVal">-- INR</div>
+            </div>
+            <div class="rate-card">
+                <div class="rate-info">🇳🇵 NPR: 31.42 <span class="rate-down">↓</span></div>
+                <div class="converted-val" id="nprVal">-- NPR</div>
+            </div>
+            <div class="rate-card">
+                <div class="rate-info">🇵🇭 PHP: 14.99 <span class="rate-up">↑</span></div>
+                <div class="converted-val" id="phpVal">-- PHP</div>
+            </div>
+            <div class="rate-card">
+                <div class="rate-info">🇵🇰 PKR: 24.35 <span class="rate-up">↑</span></div>
+                <div class="converted-val" id="pkrVal">-- PKR</div>
+            </div>
         </div>
     </a>
 
-    <!-- Faint footer links as seen in design (for potential integration later) -->
     <div class="faint-ad-links">
         <span>Sponsored</span>
         <span>Advertise Here</span>
         <span>Related Services</span>
     </div>
-
 </div>
 
 <script>
+// Fixed baseline conversion rates for instant calculation
+const rates = {
+    INR: 22.85,
+    NPR: 31.42,
+    PHP: 14.99,
+    PKR: 24.35
+};
+
 function calculateGratuity() {
     let salary = parseFloat(document.getElementById('basicSalary').value);
     let years = parseFloat(document.getElementById('years').value);
@@ -144,8 +175,15 @@ function calculateGratuity() {
     let maxCap = salary * 24;
     if (totalGratuity > maxCap) totalGratuity = maxCap;
 
-    document.getElementById('gratuityResult').innerText = totalGratuity.toFixed(2) + " AED";
+    // Display AED Result
+    document.getElementById('gratuityResult').innerText = totalGratuity.toLocaleString('en-US', {maximumFractionDigits: 2}) + " AED";
     document.getElementById('resultBox').style.display = "block";
+
+    // Update Home Currency Converted Values
+    document.getElementById('inrVal').innerText = (totalGratuity * rates.INR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " INR";
+    document.getElementById('nprVal').innerText = (totalGratuity * rates.NPR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " NPR";
+    document.getElementById('phpVal').innerText = (totalGratuity * rates.PHP).toLocaleString('en-US', {maximumFractionDigits: 0}) + " PHP";
+    document.getElementById('pkrVal').innerText = (totalGratuity * rates.PKR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " PKR";
 }
 </script>
 
