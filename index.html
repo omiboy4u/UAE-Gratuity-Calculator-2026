@@ -9,7 +9,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <title>AE UAE Gratuity Calculator & CV Builder | Quick & Free</title>
+    <title>AE UAE Gratuity Calculator & AI Resume Builder | Quick & Free</title>
 
     <!-- Google AdSense Verification Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589818037936447"
@@ -157,7 +157,7 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-            max-width: 450px;
+            max-width: 480px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -171,11 +171,23 @@
             color: #888;
             cursor: pointer;
         }
-        .field-note {
-            font-size: 10px;
-            color: #888;
-            font-weight: normal;
+        .field-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
         }
+        .ai-btn {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .ai-btn:hover { background: #732d91; }
 
         .faint-ad-links {
             display: flex;
@@ -215,7 +227,7 @@
         .resume-preview-area {
             display: none;
             margin-top: 15px;
-            padding: 15px;
+            padding: 18px;
             background: #fff;
             border: 1px solid #2c3e50;
             border-radius: 8px;
@@ -223,28 +235,49 @@
             line-height: 1.4;
             color: #333;
         }
-        .resume-header {
-            border-bottom: 2px solid #2980b9;
+        
+        /* Template Theme 1: Modern Executive (Default) */
+        .theme-modern .resume-header {
+            border-bottom: 3px solid #2980b9;
             padding-bottom: 8px;
             margin-bottom: 10px;
         }
-        .resume-name {
-            font-size: 18px;
+        .theme-modern .resume-name {
+            font-size: 20px;
             font-weight: bold;
             color: #2c3e50;
         }
-        .resume-sub {
-            font-size: 12px;
-            color: #7f8c8d;
-        }
-        .resume-section-title {
+        .theme-modern .resume-section-title {
             font-size: 12px;
             font-weight: bold;
             color: #2980b9;
             text-transform: uppercase;
+            margin-top: 12px;
+            margin-bottom: 4px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* Template Theme 2: Minimalist Clean */
+        .theme-minimal .resume-header {
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .theme-minimal .resume-name {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #111;
+        }
+        .theme-minimal .resume-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #333;
+            text-transform: uppercase;
             margin-top: 10px;
             margin-bottom: 4px;
-            border-bottom: 1px solid #eee;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -291,11 +324,11 @@
         </div>
     </a>
 
-    <!-- UAE Career & Native Resume Builder Card -->
+    <!-- UAE Career & AI Native Resume Builder Card -->
     <div class="career-card">
         <div class="career-title">📄 Planning Your Next Job Move in UAE?</div>
-        <p class="career-desc">Build your updated UAE ATS-friendly resume directly on this page for free.</p>
-        <button class="career-btn" onclick="openResumeModal()">✨ Create Resume Now</button>
+        <p class="career-desc">Build & AI-enhance your ATS-friendly UAE resume instantly on this page.</p>
+        <button class="career-btn" onclick="openResumeModal()">✨ Build Resume with AI Assistance</button>
     </div>
 
     <div class="faint-ad-links">
@@ -315,38 +348,50 @@
     </div>
 </div>
 
-<!-- Native Resume Builder Modal Form -->
+<!-- Native AI-Enhanced Resume Builder Modal Form -->
 <div class="modal-overlay" id="resumeModal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeResumeModal()">&times;</span>
-        <h3 style="margin-top:0; color:#2c3e50; font-size:18px;">📄 UAE Instant Resume Form</h3>
-        <p style="font-size:11px; color:#666; margin-bottom:15px;">Fill out the fields below or leave blank to skip any section.</p>
+        <h3 style="margin-top:0; color:#2c3e50; font-size:18px;">📄 UAE Smart Resume Builder</h3>
+        <p style="font-size:11px; color:#666; margin-bottom:12px;">Fill out the fields or use AI auto-fill to generate a polished resume format.</p>
 
-        <label for="cvName">Full Name <span class="field-note">(Optional)</span></label>
+        <label for="cvTemplate">Select PDF Layout Style</label>
+        <select id="cvTemplate">
+            <option value="modern">Modern Executive (Blue Headers & Accents)</option>
+            <option value="minimal">Minimalist Clean (Classic Monochrome)</option>
+        </select>
+
+        <label for="cvName">Full Name</label>
         <input type="text" id="cvName" placeholder="e.g. Roshni Lama">
 
-        <label for="cvTitle">Target Job Title <span class="field-note">(Optional)</span></label>
+        <label for="cvTitle">Target Job Title</label>
         <input type="text" id="cvTitle" placeholder="e.g. Senior Retail Professional / Store Specialist">
 
-        <label for="cvContact">Contact Info (Phone / Email / Location) <span class="field-note">(Optional)</span></label>
+        <label for="cvContact">Contact Info</label>
         <input type="text" id="cvContact" placeholder="e.g. +971 50 123 4567 | Dubai, UAE | email@domain.com">
 
-        <label for="cvVisa">Visa Status & Notice Period <span class="field-note">(Crucial for UAE Employers)</span></label>
+        <label for="cvVisa">Visa Status & Notice Period</label>
         <input type="text" id="cvVisa" placeholder="e.g. Employment Visa (Cancelled / Serving Notice Period - 30 Days)">
 
-        <label for="cvSummary">Professional Summary <span class="field-note">(Optional - Fill or Skip)</span></label>
-        <textarea id="cvSummary" placeholder="e.g. Experienced retail specialist with 8+ years of expertise in customer service, sales, and team coordination in the UAE market..."></textarea>
+        <div class="field-header">
+            <label for="cvSummary" style="margin:0;">Professional Summary</label>
+            <button class="ai-btn" onclick="enhanceSummaryWithAI()">✨ AI Polish</button>
+        </div>
+        <textarea id="cvSummary" placeholder="e.g. Experienced retail specialist with expertise in customer service, sales, and store operations..."></textarea>
 
-        <label for="cvExperience">Work Experience Highlights <span class="field-note">(Optional - Fill or Skip)</span></label>
-        <textarea id="cvExperience" placeholder="e.g. Senior Specialist (2017 - Present) - Managed inventory, assisted customers, led retail promotions..."></textarea>
+        <div class="field-header">
+            <label for="cvExperience" style="margin:0;">Work Experience Highlights</label>
+            <button class="ai-btn" onclick="enhanceExperienceWithAI()">✨ AI Enhance Bullets</button>
+        </div>
+        <textarea id="cvExperience" placeholder="e.g. Retail Specialist (2017 - Present) - Managed inventory, assisted customers, led retail promotions..."></textarea>
 
-        <label for="cvSkills">Key Skills <span class="field-note">(Optional - Fill or Skip)</span></label>
+        <label for="cvSkills">Key Skills</label>
         <input type="text" id="cvSkills" placeholder="e.g. Customer Service, Inventory Management, POS Systems, Team Leadership">
 
-        <button onclick="generateResumeDesign()" style="background:#2980b9;">🚀 Generate Resume Design</button>
+        <button onclick="generateResumeDesign()" style="background:#8e44ad;">🚀 Generate & Format Resume</button>
 
         <!-- Container for Output Preview -->
-        <div class="resume-preview-area" id="resumePreview">
+        <div class="resume-preview-area theme-modern" id="resumePreview">
             <div class="resume-header">
                 <div class="resume-name" id="prevName"></div>
                 <div class="resume-sub" id="prevTitle"></div>
@@ -453,7 +498,7 @@ function calculateGratuity() {
     updateConvertedValues();
 }
 
-// Resume Modal Handlers
+// Modal Open/Close
 function openResumeModal() {
     document.getElementById('resumeModal').style.display = 'flex';
 }
@@ -462,7 +507,32 @@ function closeResumeModal() {
     document.getElementById('resumeModal').style.display = 'none';
 }
 
+// AI Enhancer Helper Functions
+function enhanceSummaryWithAI() {
+    let text = document.getElementById('cvSummary').value.trim();
+    if (!text) {
+        document.getElementById('cvSummary').value = "Results-driven professional with extensive experience in the UAE market. Proven track record in operational efficiency, customer satisfaction, and team collaboration. Seeking to leverage strong industry skills in a dynamic new role.";
+    } else {
+        document.getElementById('cvSummary').value = "Accomplished and client-focused professional with proven expertise in " + text + ". Adept at driving customer engagement, optimizing operational workflows, and delivering high standards across UAE business environments.";
+    }
+}
+
+function enhanceExperienceWithAI() {
+    let text = document.getElementById('cvExperience').value.trim();
+    if (!text) {
+        document.getElementById('cvExperience').value = "• Delivered exceptional service to high volumes of daily clients.\n• Managed daily stock reconciliation and inventory auditing.\n• Collaborated with cross-functional teams to meet monthly operational KPIs.";
+    } else {
+        document.getElementById('cvExperience').value = "• Executed daily responsibilities covering " + text + " with high accuracy.\n• Streamlined customer satisfaction metrics and resolved operational queries promptly.\n• Maintained compliance with company standards and UAE industry regulations.";
+    }
+}
+
+// Generate Resume Layout
 function generateResumeDesign() {
+    let templateStyle = document.getElementById('cvTemplate').value;
+    let previewArea = document.getElementById('resumePreview');
+    
+    previewArea.className = "resume-preview-area " + (templateStyle === 'minimal' ? 'theme-minimal' : 'theme-modern');
+
     let name = document.getElementById('cvName').value.trim() || "Applicant Name";
     let title = document.getElementById('cvTitle').value.trim() || "Professional";
     let contact = document.getElementById('cvContact').value.trim() || "";
@@ -497,7 +567,7 @@ function generateResumeDesign() {
         document.getElementById('secSkills').style.display = 'none';
     }
 
-    document.getElementById('resumePreview').style.display = 'block';
+    previewArea.style.display = 'block';
 }
 
 // Initial fetch on page load
