@@ -1,343 +1,72 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Prevent aggressive browser caching -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-
     <title>AE UAE Gratuity Calculator & Omiboy AI Resume Builder</title>
-
-    <!-- Google AdSense Verification Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589818037936447"
-         crossorigin="anonymous"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589818037936447" crossorigin="anonymous"></script>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
-        
-        .card { 
-            background: white; 
-            padding: 25px 25px 0px 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-            max-width: 400px; 
-            width: 100%; 
-            position: relative; 
-            overflow: hidden; 
-        }
-
+        .card { background: white; padding: 25px 25px 0px 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 400px; width: 100%; position: relative; overflow: hidden; }
         h2 { text-align: center; color: #2c3e50; margin-top: 0; margin-bottom: 15px; font-size: 22px; }
         label { font-weight: 600; color: #34495e; display: block; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
         input, textarea, select { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 13px; }
         textarea { resize: vertical; height: 60px; }
-
         button { width: 100%; background: #27ae60; color: white; border: none; padding: 10px; font-size: 15px; font-weight: bold; border-radius: 6px; margin-top: 15px; cursor: pointer; }
         button:hover { background: #219150; }
-        
         .result-box { margin-top: 15px; padding: 10px; background: #e8f8f5; border: 1px solid #a3e4d7; border-radius: 6px; text-align: center; }
         .result-amount { font-size: 22px; font-weight: bold; color: #27ae60; margin-top: 3px; }
-
-        /* Compact Red Currency Box */
-        .currency-box {
-            display: block;
-            text-decoration: none;
-            margin-top: 18px;
-            padding: 10px;
-            border: 1.5px solid #e74c3c;
-            background-color: #fcf3f2;
-            border-radius: 8px;
-            text-align: center;
-            color: #333;
-            transition: background-color 0.2s ease;
-        }
-        .currency-box:hover {
-            background-color: #f9e1e0;
-        }
-        .currency-main-text {
-            font-size: 14px;
-            font-weight: bold;
-            color: #c0392b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-        .rate-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 6px;
-        }
-        .rate-card {
-            background: #ffffff;
-            padding: 6px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .rate-info {
-            font-size: 12px;
-            font-weight: 600;
-            color: #444;
-        }
+        .currency-box { display: block; text-decoration: none; margin-top: 18px; padding: 10px; border: 1.5px solid #e74c3c; background-color: #fcf3f2; border-radius: 8px; text-align: center; color: #333; transition: background-color 0.2s ease; }
+        .currency-box:hover { background-color: #f9e1e0; }
+        .currency-main-text { font-size: 14px; font-weight: bold; color: #c0392b; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 8px; }
+        .rate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+        .rate-card { background: #ffffff; padding: 6px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; }
+        .rate-info { font-size: 12px; font-weight: 600; color: #444; }
         .rate-up { color: #27ae60; }
         .rate-down { color: #e74c3c; }
-
-        .converted-val {
-            font-size: 11px;
-            font-weight: bold;
-            color: #27ae60;
-            margin-top: 3px;
-            background: #e8f8f5;
-            padding: 2px 6px;
-            border-radius: 4px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Career & Resume Toolkit Card */
-        .career-card {
-            margin-top: 15px;
-            padding: 12px;
-            background: #f4f6f9;
-            border: 1.5px solid #8e44ad;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .career-title {
-            font-size: 13px;
-            font-weight: bold;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        .career-desc {
-            font-size: 11px;
-            color: #555;
-            margin: 6px 0 10px 0;
-            line-height: 1.3;
-        }
-        .career-btn {
-            display: inline-block;
-            background: #8e44ad;
-            color: white;
-            border: none;
-            padding: 9px 18px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .career-btn:hover {
-            background: #732d91;
-        }
-
-        /* Modal Popup Styles for Omiboy AI Wizard */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-        }
-        .modal-content {
-            background: white;
-            padding: 22px;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        .close-modal {
-            position: absolute;
-            top: 12px; right: 15px;
-            font-size: 22px;
-            font-weight: bold;
-            color: #888;
-            cursor: pointer;
-        }
-
-        /* Chat / Wizard Styling */
-        .ai-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #f8f0fc;
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px solid #e8d0f5;
-            margin-bottom: 15px;
-        }
-        .ai-avatar {
-            width: 38px; height: 38px;
-            background: #8e44ad;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .ai-intro-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 0;
-        }
-        .ai-intro-sub {
-            font-size: 11px;
-            color: #7f8c8d;
-            margin-top: 2px;
-        }
-
+        .converted-val { font-size: 11px; font-weight: bold; color: #27ae60; margin-top: 3px; background: #e8f8f5; padding: 2px 6px; border-radius: 4px; width: 100%; text-align: center; }
+        .career-card { margin-top: 15px; padding: 12px; background: #f4f6f9; border: 1.5px solid #8e44ad; border-radius: 8px; text-align: center; }
+        .career-title { font-size: 13px; font-weight: bold; color: #2c3e50; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .career-desc { font-size: 11px; color: #555; margin: 6px 0 10px 0; line-height: 1.3; }
+        .career-btn { display: inline-block; background: #8e44ad; color: white; border: none; padding: 9px 18px; border-radius: 5px; font-size: 12px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .career-btn:hover { background: #732d91; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 15px; }
+        .modal-content { background: white; padding: 22px; border-radius: 12px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .close-modal { position: absolute; top: 12px; right: 15px; font-size: 22px; font-weight: bold; color: #888; cursor: pointer; }
+        .ai-header { display: flex; align-items: center; gap: 10px; background: #f8f0fc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e8d0f5; margin-bottom: 15px; }
+        .ai-avatar { width: 38px; height: 38px; background: #8e44ad; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; }
+        .ai-intro-title { font-size: 14px; font-weight: bold; color: #2c3e50; margin: 0; }
+        .ai-intro-sub { font-size: 11px; color: #7f8c8d; margin-top: 2px; }
         .wizard-step { display: none; }
         .wizard-step.active { display: block; }
-
-        .ai-msg-bubble {
-            background: #f4f6f8;
-            border-left: 3px solid #8e44ad;
-            padding: 10px 12px;
-            font-size: 12px;
-            color: #333;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        /* Design Selection Cards */
-        .design-options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 12px 0;
-        }
-        .design-card {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: #fff;
-        }
-        .design-card:hover, .design-card.selected {
-            border-color: #8e44ad;
-            background: #fbf5fc;
-        }
-        .design-card-title {
-            font-size: 12px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .design-card-desc {
-            font-size: 10px;
-            color: #777;
-            margin-top: 4px;
-        }
-
-        .wizard-nav-btns {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .btn-sec {
-            background: #95a5a6;
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            width: auto;
-        }
-        .btn-pri {
-            background: #8e44ad;
-            color: white;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            width: auto;
-        }
+        .ai-msg-bubble { background: #f4f6f8; border-left: 3px solid #8e44ad; padding: 10px 12px; font-size: 12px; color: #333; border-radius: 0 8px 8px 0; margin-bottom: 12px; line-height: 1.4; }
+        .design-options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 12px 0; }
+        .design-card { border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s; background: #fff; }
+        .design-card:hover, .design-card.selected { border-color: #8e44ad; background: #fbf5fc; }
+        .design-card-title { font-size: 12px; font-weight: bold; color: #2c3e50; }
+        .design-card-desc { font-size: 10px; color: #777; margin-top: 4px; }
+        .wizard-nav-btns { display: flex; justify-content: space-between; gap: 10px; margin-top: 15px; }
+        .btn-sec { background: #95a5a6; color: white; border: none; padding: 8px 14px; border-radius: 5px; font-size: 12px; font-weight: bold; cursor: pointer; width: auto; }
+        .btn-pri { background: #8e44ad; color: white; border: none; padding: 8px 18px; border-radius: 5px; font-size: 12px; font-weight: bold; cursor: pointer; width: auto; }
         .btn-pri:hover { background: #732d91; }
-
-        .faint-ad-links {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            font-size: 11px;
-            color: #bdc3c7;
-        }
-
-        /* Light Moving Gold Ticker at Very Bottom Edge */
-        .gold-footer-ticker {
-            background-color: #fcfbfa;
-            border-top: 1px solid #f4efe6;
-            margin: 0 -25px;
-            padding: 6px 0;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .gold-ticker-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: marquee 16s linear infinite;
-            font-size: 11px;
-            color: #8c7e63;
-            font-weight: 500;
-        }
-        .gold-ticker-content span {
-            margin-right: 35px;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Generated Resume Preview Area */
-        .resume-preview-area {
-            display: none;
-            margin-top: 15px;
-            padding: 18px;
-            background: #fff;
-            border: 1px solid #2c3e50;
-            border-radius: 8px;
-            font-size: 12px;
-            line-height: 1.4;
-            color: #333;
-        }
-        
-        /* Template Themes */
+        .faint-ad-links { display: flex; justify-content: space-around; margin-top: 15px; margin-bottom: 15px; font-size: 11px; color: #bdc3c7; }
+        .gold-footer-ticker { background-color: #fcfbfa; border-top: 1px solid #f4efe6; margin: 0 -25px; padding: 6px 0; overflow: hidden; white-space: nowrap; }
+        .gold-ticker-content { display: inline-block; white-space: nowrap; animation: marquee 16s linear infinite; font-size: 11px; color: #8c7e63; font-weight: 500; }
+        .gold-ticker-content span { margin-right: 35px; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .resume-preview-area { display: none; margin-top: 15px; padding: 18px; background: #fff; border: 1px solid #2c3e50; border-radius: 8px; font-size: 12px; line-height: 1.4; color: #333; }
         .theme-modern .resume-header { border-bottom: 3px solid #2980b9; padding-bottom: 8px; margin-bottom: 10px; }
         .theme-modern .resume-name { font-size: 20px; font-weight: bold; color: #2c3e50; }
         .theme-modern .resume-section-title { font-size: 12px; font-weight: bold; color: #2980b9; text-transform: uppercase; margin-top: 12px; margin-bottom: 4px; border-bottom: 1px solid #e2e8f0; }
-
         .theme-minimal .resume-header { text-align: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 10px; }
         .theme-minimal .resume-name { font-size: 18px; font-weight: 600; letter-spacing: 1px; color: #111; }
         .theme-minimal .resume-section-title { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; margin-top: 10px; margin-bottom: 4px; letter-spacing: 0.5px; }
-
         .theme-creative .resume-header { border-left: 4px solid #8e44ad; padding-left: 10px; margin-bottom: 12px; }
         .theme-creative .resume-name { font-size: 20px; font-weight: bold; color: #8e44ad; }
         .theme-creative .resume-section-title { font-size: 12px; font-weight: bold; color: #8e44ad; margin-top: 12px; margin-bottom: 4px; border-bottom: 1.5px solid #8e44ad; }
@@ -415,7 +144,6 @@
     <div class="modal-content">
         <span class="close-modal" onclick="closeResumeModal()">&times;</span>
         
-        <!-- AI Header Banner -->
         <div class="ai-header">
             <div class="ai-avatar">🤖</div>
             <div>
@@ -424,7 +152,6 @@
             </div>
         </div>
 
-        <!-- Step 1: Welcome & Design Style Selection -->
         <div class="wizard-step active" id="step1">
             <div class="ai-msg-bubble">
                 "Hello! 👋 I am <strong>Omiboy</strong>, and I will help you build your professional UAE resume step-by-step. <br><br>First, let's pick a design layout template for your CV:"
@@ -450,7 +177,6 @@
             </div>
         </div>
 
-        <!-- Step 2: Basic Contact & UAE Visa Status -->
         <div class="wizard-step" id="step2">
             <div class="ai-msg-bubble">
                 "Great choice! Now, please share your contact info. (You can fill what you like or skip any field!)"
@@ -474,7 +200,6 @@
             </div>
         </div>
 
-        <!-- Step 3: Experience & Auto-Fill / Copy Paste -->
         <div class="wizard-step" id="step3">
             <div class="ai-msg-bubble">
                 "Awesome! Next is your work experience. Would you like to **copy-paste** your previous work duties or let me generate bullet points for you?"
@@ -491,7 +216,6 @@
             </div>
         </div>
 
-        <!-- Step 4: Summary & Skills -->
         <div class="wizard-step" id="step4">
             <div class="ai-msg-bubble">
                 "Almost done! Let's add a short Professional Summary and your Key Skills."
@@ -510,7 +234,6 @@
             </div>
         </div>
 
-        <!-- Final Preview Area -->
         <div class="resume-preview-area theme-modern" id="resumePreview">
             <div class="resume-header">
                 <div class="resume-name" id="prevName"></div>
@@ -539,19 +262,11 @@
                 <button onclick="window.print()" style="background:#27ae60;">🖨️ Save as PDF</button>
             </div>
         </div>
-
     </div>
 </div>
 
 <script>
-// Baseline live rates
-let liveRates = {
-    INR: 26.25,
-    NPR: 42.03,
-    PHP: 16.79,
-    PKR: 75.65
-};
-
+let liveRates = { INR: 26.25, NPR: 42.03, PHP: 16.79, PKR: 75.65 };
 let currentGratuityAED = 0;
 let selectedTemplateStyle = 'modern';
 
@@ -559,22 +274,19 @@ async function fetchLiveRates() {
     try {
         const response = await fetch('https://open.er-api.com/v6/latest/AED');
         const data = await response.json();
-        
         if (data && data.rates) {
             liveRates.INR = data.rates.INR;
             liveRates.NPR = data.rates.NPR;
             liveRates.PHP = data.rates.PHP;
             liveRates.PKR = data.rates.PKR;
-
             document.getElementById('inrRate').innerText = liveRates.INR.toFixed(2);
             document.getElementById('nprRate').innerText = liveRates.NPR.toFixed(2);
             document.getElementById('phpRate').innerText = liveRates.PHP.toFixed(2);
             document.getElementById('pkrRate').innerText = liveRates.PKR.toFixed(2);
-
             updateConvertedValues();
         }
     } catch (error) {
-        console.log("Using current baseline market rates.");
+        console.log("Using baseline market rates.");
     }
 }
 
@@ -595,15 +307,12 @@ function updateConvertedValues() {
 function calculateGratuity() {
     let salary = parseFloat(document.getElementById('basicSalary').value);
     let years = parseFloat(document.getElementById('years').value);
-    
     if (isNaN(salary) || isNaN(years) || salary <= 0 || years < 1) {
         alert("Please enter a valid salary and at least 1 year of service.");
         return;
     }
-
     let dailyRate = salary / 30;
     let totalGratuity = 0;
-
     if (years <= 5) {
         totalGratuity = dailyRate * 21 * years;
     } else {
@@ -611,19 +320,14 @@ function calculateGratuity() {
         let remainingYears = dailyRate * 30 * (years - 5);
         totalGratuity = firstFiveYears + remainingYears;
     }
-
     let maxCap = salary * 24;
     if (totalGratuity > maxCap) totalGratuity = maxCap;
-
     currentGratuityAED = totalGratuity;
-
     document.getElementById('gratuityResult').innerText = totalGratuity.toLocaleString('en-US', {maximumFractionDigits: 2}) + " AED";
     document.getElementById('resultBox').style.display = "block";
-
     updateConvertedValues();
 }
 
-// Wizard Step Navigation
 function openResumeModal() {
     document.getElementById('resumeModal').style.display = 'flex';
     goToStep(1);
@@ -645,7 +349,6 @@ function selectDesign(styleName, element) {
     element.classList.add('selected');
 }
 
-// AI Auto-Fill Functions
 function autoFillExperienceAI() {
     let existing = document.getElementById('cvExperience').value.trim();
     if (!existing) {
@@ -660,12 +363,10 @@ function autoFillSummaryAI() {
     document.getElementById('cvSummary').value = "Accomplished and results-driven " + title + " with extensive experience in the UAE market. Proven track record in operational efficiency, customer satisfaction, and team collaboration.";
 }
 
-// Render Final CV
 function generateFinalCV() {
     document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
     let previewArea = document.getElementById('resumePreview');
     previewArea.className = "resume-preview-area theme-" + selectedTemplateStyle;
-
     let name = document.getElementById('cvName').value.trim() || "Applicant Name";
     let title = document.getElementById('cvTitle').value.trim() || "Professional";
     let contact = document.getElementById('cvContact').value.trim() || "";
@@ -703,12 +404,8 @@ function generateFinalCV() {
     previewArea.style.display = 'block';
 }
 
-// Initial fetch on page load
 fetchLiveRates();
-
-// Refresh rates automatically every 30 seconds
 setInterval(fetchLiveRates, 30000);
 </script>
-
 </body>
 </html>
