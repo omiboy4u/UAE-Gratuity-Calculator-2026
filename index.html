@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Prevent aggressive browser caching across mobile and desktop -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <title>AE UAE Gratuity Calculator | Quick & Free</title>
 
     <!-- Google AdSense Verification Code -->
@@ -115,20 +121,20 @@
         </div>
         <div class="rate-grid">
             <div class="rate-card">
-                <div class="rate-info">🇮🇳 INR: <span id="inrRate">Fetching...</span> <span id="inrArrow" class="rate-up">↑</span></div>
-                <div class="converted-val" id="inrVal">Loading...</div>
+                <div class="rate-info">🇮🇳 INR: <span id="inrRate">26.25</span> <span id="inrArrow" class="rate-up">↑</span></div>
+                <div class="converted-val" id="inrVal">1 AED = 26.25 INR</div>
             </div>
             <div class="rate-card">
-                <div class="rate-info">🇳🇵 NPR: <span id="nprRate">Fetching...</span> <span id="nprArrow" class="rate-down">↓</span></div>
-                <div class="converted-val" id="nprVal">Loading...</div>
+                <div class="rate-info">🇳🇵 NPR: <span id="nprRate">42.03</span> <span id="nprArrow" class="rate-down">↓</span></div>
+                <div class="converted-val" id="nprVal">1 AED = 42.03 NPR</div>
             </div>
             <div class="rate-card">
-                <div class="rate-info">🇵🇭 PHP: <span id="phpRate">Fetching...</span> <span id="phpArrow" class="rate-up">↑</span></div>
-                <div class="converted-val" id="phpVal">Loading...</div>
+                <div class="rate-info">🇵🇭 PHP: <span id="phpRate">16.79</span> <span id="phpArrow" class="rate-up">↑</span></div>
+                <div class="converted-val" id="phpVal">1 AED = 16.79 PHP</div>
             </div>
             <div class="rate-card">
-                <div class="rate-info">🇵🇰 PKR: <span id="pkrRate">Fetching...</span> <span id="pkrArrow" class="rate-up">↑</span></div>
-                <div class="converted-val" id="pkrVal">Loading...</div>
+                <div class="rate-info">🇵🇰 PKR: <span id="pkrRate">75.65</span> <span id="pkrArrow" class="rate-up">↑</span></div>
+                <div class="converted-val" id="pkrVal">1 AED = 75.65 PKR</div>
             </div>
         </div>
     </a>
@@ -141,12 +147,12 @@
 </div>
 
 <script>
-// Dynamic rates object initialized
+// Live exchange rate object with baseline values
 let liveRates = {
-    INR: 0,
-    NPR: 0,
-    PHP: 0,
-    PKR: 0
+    INR: 26.25,
+    NPR: 42.03,
+    PHP: 16.79,
+    PKR: 75.65
 };
 
 let currentGratuityAED = 0;
@@ -162,7 +168,6 @@ async function fetchLiveRates() {
             liveRates.PHP = data.rates.PHP;
             liveRates.PKR = data.rates.PKR;
 
-            // Dynamically update rates in UI
             document.getElementById('inrRate').innerText = liveRates.INR.toFixed(2);
             document.getElementById('nprRate').innerText = liveRates.NPR.toFixed(2);
             document.getElementById('phpRate').innerText = liveRates.PHP.toFixed(2);
@@ -171,13 +176,11 @@ async function fetchLiveRates() {
             updateConvertedValues();
         }
     } catch (error) {
-        console.error("Live fetch error, fallback active:", error);
+        console.log("Using current baseline market rates.");
     }
 }
 
 function updateConvertedValues() {
-    if (liveRates.INR === 0) return; // Wait until API responds
-
     if (currentGratuityAED > 0) {
         document.getElementById('inrVal').innerText = (currentGratuityAED * liveRates.INR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " INR";
         document.getElementById('nprVal').innerText = (currentGratuityAED * liveRates.NPR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " NPR";
