@@ -321,14 +321,14 @@
         <span>Related Services</span>
     </div>
 
-    <!-- Social Share Buttons & Like Counter -->
+    <!-- Social Share Buttons & Real-time Like Counter -->
     <div class="social-share-container">
         <div class="social-share-label">Like & Share this calculator:</div>
         <div class="social-share-btns">
-            <!-- Like Button -->
-            <button id="likeBtn" onclick="toggleLike()" class="social-btn btn-like">
+            <!-- Global Real-Time Like Button -->
+            <button id="likeBtn" onclick="registerGlobalLike()" class="social-btn btn-like">
                 <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <span id="likeText">Like</span> (<span id="likeCount">1,482</span>)
+                <span id="likeText">Like</span> (<span id="likeCount">...</span>)
             </button>
 
             <!-- WhatsApp -->
@@ -381,6 +381,10 @@
 </div>
 
 <script>
+// Namespace key for CountAPI Cloud Storage
+const counterNamespace = "omiboy4u_uae_gratuity_calc_2026";
+const counterKey = "likes";
+
 // Baseline live values
 let liveRates = {
     INR: 26.25,
@@ -400,38 +404,54 @@ function closeInfoModal() {
     document.getElementById('infoModal').style.display = 'none';
 }
 
-// Like Counter Handler
-let baseLikes = 1482;
-let hasLiked = localStorage.getItem('uae_calc_liked') === 'true';
+// Global Real-time Like Counter Handler using CountAPI
+async function fetchGlobalLikes() {
+    let hasLiked = localStorage.getItem('uae_calc_liked') === 'true';
+    let btn = document.getElementById('likeBtn');
+    let text = document.getElementById('likeText');
 
-function initLikes() {
-    let count = baseLikes + (hasLiked ? 1 : 0);
-    document.getElementById('likeCount').innerText = count.toLocaleString();
     if (hasLiked) {
-        document.getElementById('likeBtn').classList.add('liked');
-        document.getElementById('likeText').innerText = 'Liked';
+        btn.classList.add('liked');
+        text.innerText = 'Liked';
+    }
+
+    try {
+        const res = await fetch(`https://api.countapi.xyz/get/${counterNamespace}/${counterKey}`);
+        const data = await res.json();
+        if (data && data.value !== undefined) {
+            document.getElementById('likeCount').innerText = data.value.toLocaleString();
+        } else {
+            // Create counter if first time initialization
+            const initRes = await fetch(`https://api.countapi.xyz/create?namespace=${counterNamespace}&key=${counterKey}&value=1`);
+            const initData = await initRes.json();
+            document.getElementById('likeCount').innerText = (initData.value || 1).toLocaleString();
+        }
+    } catch (err) {
+        document.getElementById('likeCount').innerText = "1";
     }
 }
 
-function toggleLike() {
+async function registerGlobalLike() {
+    let hasLiked = localStorage.getItem('uae_calc_liked') === 'true';
+    if (hasLiked) return; // Prevent double-liking from the same device
+
     let btn = document.getElementById('likeBtn');
     let text = document.getElementById('likeText');
-    let countElem = document.getElementById('likeCount');
 
-    if (!hasLiked) {
-        hasLiked = true;
-        localStorage.setItem('uae_calc_liked', 'true');
-        btn.classList.add('liked');
-        text.innerText = 'Liked';
-        baseLikes += 1;
-    } else {
-        hasLiked = false;
-        localStorage.removeItem('uae_calc_liked');
-        btn.classList.remove('liked');
-        text.innerText = 'Like';
-        baseLikes -= 1;
+    btn.classList.add('liked');
+    text.innerText = 'Liked';
+    localStorage.setItem('uae_calc_liked', 'true');
+
+    try {
+        const res = await fetch(`https://api.countapi.xyz/hit/${counterNamespace}/${counterKey}`);
+        const data = await res.json();
+        if (data && data.value !== undefined) {
+            document.getElementById('likeCount').innerText = data.value.toLocaleString();
+        }
+    } catch (err) {
+        let current = parseInt(document.getElementById('likeCount').innerText) || 0;
+        document.getElementById('likeCount').innerText = (current + 1).toLocaleString();
     }
-    countElem.innerText = baseLikes.toLocaleString();
 }
 
 async function fetchLiveRates() {
@@ -503,7 +523,7 @@ function calculateGratuity() {
 }
 
 // Initializations on page load
-initLikes();
+fetchGlobalLikes();
 fetchLiveRates();
 
 // Refresh rates automatically every 30 seconds
