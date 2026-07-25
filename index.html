@@ -31,7 +31,35 @@
         }
 
         h2 { text-align: center; color: #2c3e50; margin-top: 0; margin-bottom: 15px; font-size: 22px; }
-        label { font-weight: 600; color: #34495e; display: block; margin-top: 12px; margin-bottom: 4px; font-size: 14px; }
+        
+        .label-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            margin-bottom: 4px;
+        }
+        label { font-weight: 600; color: #34495e; font-size: 14px; }
+        
+        /* Question / Info Icon */
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .info-icon:hover {
+            background-color: #2980b9;
+        }
+
         input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
         button { width: 100%; background: #27ae60; color: white; border: none; padding: 10px; font-size: 15px; font-weight: bold; border-radius: 6px; margin-top: 15px; cursor: pointer; }
         button:hover { background: #219150; }
@@ -108,7 +136,7 @@
             color: #bdc3c7;
         }
 
-        /* Social Share Bar */
+        /* Social Share Bar & Like Button */
         .social-share-container {
             text-align: center;
             margin-top: 10px;
@@ -125,28 +153,41 @@
         .social-share-btns {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .social-btn {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 6px 12px;
+            gap: 4px;
+            padding: 6px 10px;
             border-radius: 20px;
             color: white;
             text-decoration: none;
             font-size: 11px;
             font-weight: bold;
+            border: none;
+            cursor: pointer;
             transition: transform 0.2s, opacity 0.2s;
         }
         .social-btn:hover {
             transform: translateY(-2px);
             opacity: 0.9;
         }
+        .btn-like {
+            background-color: #ffffff;
+            color: #e74c3c;
+            border: 1.5px solid #e74c3c;
+        }
+        .btn-like.liked {
+            background-color: #e74c3c;
+            color: #ffffff;
+        }
         .btn-whatsapp { background-color: #25D366; }
         .btn-facebook { background-color: #1877F2; }
         .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .social-btn svg { width: 14px; height: 14px; fill: currentColor; }
+        .social-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
         /* Light Moving Gold Ticker at Very Bottom Edge */
         .gold-footer-ticker {
@@ -172,6 +213,58 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+
+        /* Modal Overlay & Card for Explanation */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 380px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .close-modal {
+            position: absolute;
+            top: 12px; right: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+        }
+        .modal-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .modal-body {
+            font-size: 12px;
+            color: #444;
+            line-height: 1.5;
+        }
+        .modal-body ul {
+            padding-left: 18px;
+            margin: 8px 0;
+        }
+        .modal-body li {
+            margin-bottom: 6px;
+        }
     </style>
 </head>
 <body>
@@ -179,10 +272,15 @@
 <div class="card">
     <h2>🇦🇪 UAE Gratuity Calculator</h2>
     
-    <label for="basicSalary">Monthly Basic Salary (AED)</label>
+    <div class="label-container">
+        <label for="basicSalary">Monthly Basic Salary (AED)</label>
+        <span class="info-icon" onclick="openInfoModal()" title="How is this calculated?">?</span>
+    </div>
     <input type="number" id="basicSalary" placeholder="e.g. 8000">
 
-    <label for="years">Years of Service</label>
+    <div class="label-container">
+        <label for="years">Years of Service</label>
+    </div>
     <input type="number" id="years" placeholder="e.g. 3.5" step="0.1">
 
     <button onclick="calculateGratuity()">Calculate Estimate</button>
@@ -223,10 +321,16 @@
         <span>Related Services</span>
     </div>
 
-    <!-- Social Share Buttons -->
+    <!-- Social Share Buttons & Like Counter -->
     <div class="social-share-container">
-        <div class="social-share-label">Share with colleagues & friends:</div>
+        <div class="social-share-label">Like & Share this calculator:</div>
         <div class="social-share-btns">
+            <!-- Like Button -->
+            <button id="likeBtn" onclick="toggleLike()" class="social-btn btn-like">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span id="likeText">Like</span> (<span id="likeCount">1,482</span>)
+            </button>
+
             <!-- WhatsApp -->
             <a href="https://api.whatsapp.com/send?text=Calculate%20your%20UAE%20End-of-Service%20Gratuity%20easily%20and%20check%20live%20currency%20rates:%20https://omiboy4u.github.io/UAE-Gratuity-Calculator-2026/" target="_blank" class="social-btn btn-whatsapp">
                 <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
@@ -258,6 +362,24 @@
     </div>
 </div>
 
+<!-- How Gratuity is Calculated Info Modal -->
+<div class="modal-overlay" id="infoModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeInfoModal()">&times;</span>
+        <div class="modal-title">📖 How UAE Gratuity is Calculated</div>
+        <div class="modal-body">
+            <p>Under <strong>UAE Labour Law (Decree-Law No. 33 of 2021)</strong>, End of Service Gratuity is calculated based on your <strong>Basic Salary</strong> only (excluding allowances):</p>
+            <ul>
+                <li><strong>Daily Rate Formula:</strong> Monthly Basic Salary ÷ 30 Days.</li>
+                <li><strong>1 to 5 Years of Service:</strong> 21 days' basic salary for each completed year.</li>
+                <li><strong>More than 5 Years of Service:</strong> 30 days' basic salary for each additional year beyond 5 years.</li>
+                <li><strong>Maximum Limit:</strong> Total gratuity cannot exceed 2 years' (24 months') worth of basic salary.</li>
+            </ul>
+            <p style="font-size:11px; color:#7f8c8d; margin-top:8px;"><em>Note: You must complete at least 1 full year of continuous service to be eligible for gratuity.</em></p>
+        </div>
+    </div>
+</div>
+
 <script>
 // Baseline live values
 let liveRates = {
@@ -268,6 +390,49 @@ let liveRates = {
 };
 
 let currentGratuityAED = 0;
+
+// Modal Handlers
+function openInfoModal() {
+    document.getElementById('infoModal').style.display = 'flex';
+}
+
+function closeInfoModal() {
+    document.getElementById('infoModal').style.display = 'none';
+}
+
+// Like Counter Handler
+let baseLikes = 1482;
+let hasLiked = localStorage.getItem('uae_calc_liked') === 'true';
+
+function initLikes() {
+    let count = baseLikes + (hasLiked ? 1 : 0);
+    document.getElementById('likeCount').innerText = count.toLocaleString();
+    if (hasLiked) {
+        document.getElementById('likeBtn').classList.add('liked');
+        document.getElementById('likeText').innerText = 'Liked';
+    }
+}
+
+function toggleLike() {
+    let btn = document.getElementById('likeBtn');
+    let text = document.getElementById('likeText');
+    let countElem = document.getElementById('likeCount');
+
+    if (!hasLiked) {
+        hasLiked = true;
+        localStorage.setItem('uae_calc_liked', 'true');
+        btn.classList.add('liked');
+        text.innerText = 'Liked';
+        baseLikes += 1;
+    } else {
+        hasLiked = false;
+        localStorage.removeItem('uae_calc_liked');
+        btn.classList.remove('liked');
+        text.innerText = 'Like';
+        baseLikes -= 1;
+    }
+    countElem.innerText = baseLikes.toLocaleString();
+}
 
 async function fetchLiveRates() {
     try {
@@ -337,7 +502,8 @@ function calculateGratuity() {
     updateConvertedValues();
 }
 
-// Initial fetch on page load
+// Initializations on page load
+initLikes();
 fetchLiveRates();
 
 // Refresh rates automatically every 30 seconds
