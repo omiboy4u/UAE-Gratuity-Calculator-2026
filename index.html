@@ -70,7 +70,6 @@
         .rate-up { color: #27ae60; }
         .rate-down { color: #e74c3c; }
 
-        /* Converted Gratuity Value Box */
         .converted-val {
             font-size: 12px;
             font-weight: bold;
@@ -110,26 +109,26 @@
         <div class="result-amount" id="gratuityResult">0 AED</div>
     </div>
 
-    <!-- Currency Rates & Live Value Converter Box -->
+    <!-- Live Currency Rate Box -->
     <a href="https://omiboy4u.github.io/UAE-Currency-Gold-Converter/" class="currency-box">
         <div class="currency-main-text">
             <span>🔀</span> Check Today's Live Currency Rates!
         </div>
         <div class="rate-grid">
             <div class="rate-card">
-                <div class="rate-info">🇮🇳 INR: 22.85 <span class="rate-up">↑</span></div>
+                <div class="rate-info">🇮🇳 INR: <span id="inrRate">Loading...</span> <span id="inrArrow" class="rate-up">↑</span></div>
                 <div class="converted-val" id="inrVal">-- INR</div>
             </div>
             <div class="rate-card">
-                <div class="rate-info">🇳🇵 NPR: 31.42 <span class="rate-down">↓</span></div>
+                <div class="rate-info">🇳🇵 NPR: <span id="nprRate">Loading...</span> <span id="nprArrow" class="rate-down">↓</span></div>
                 <div class="converted-val" id="nprVal">-- NPR</div>
             </div>
             <div class="rate-card">
-                <div class="rate-info">🇵🇭 PHP: 14.99 <span class="rate-up">↑</span></div>
+                <div class="rate-info">🇵🇭 PHP: <span id="phpRate">Loading...</span> <span id="phpArrow" class="rate-up">↑</span></div>
                 <div class="converted-val" id="phpVal">-- PHP</div>
             </div>
             <div class="rate-card">
-                <div class="rate-info">🇵🇰 PKR: 24.35 <span class="rate-up">↑</span></div>
+                <div class="rate-info">🇵🇰 PKR: <span id="pkrRate">Loading...</span> <span id="pkrArrow" class="rate-up">↑</span></div>
                 <div class="converted-val" id="pkrVal">-- PKR</div>
             </div>
         </div>
@@ -143,13 +142,51 @@
 </div>
 
 <script>
-// Fixed baseline conversion rates for instant calculation
-const rates = {
-    INR: 22.85,
-    NPR: 31.42,
-    PHP: 14.99,
-    PKR: 24.35
+// Dynamic rates object updated via API
+let liveRates = {
+    INR: 0,
+    NPR: 0,
+    PHP: 0,
+    PKR: 0
 };
+
+let currentGratuityAED = 0;
+
+async function fetchLiveRates() {
+    try {
+        const response = await fetch('https://open.er-api.com/v6/latest/AED');
+        const data = await response.json();
+        
+        if (data && data.rates) {
+            liveRates.INR = data.rates.INR;
+            liveRates.NPR = data.rates.NPR;
+            liveRates.PHP = data.rates.PHP;
+            liveRates.PKR = data.rates.PKR;
+
+            // Update rate labels
+            document.getElementById('inrRate').innerText = liveRates.INR.toFixed(2);
+            document.getElementById('nprRate').innerText = liveRates.NPR.toFixed(2);
+            document.getElementById('phpRate').innerText = liveRates.PHP.toFixed(2);
+            document.getElementById('pkrRate').innerText = liveRates.PKR.toFixed(2);
+
+            // Re-calculate values if user already ran calculation
+            if (currentGratuityAED > 0) {
+                updateConvertedValues();
+            }
+        }
+    } catch (error) {
+        console.error("Failed to fetch live rates:", error);
+    }
+}
+
+function updateConvertedValues() {
+    if (currentGratuityAED <= 0) return;
+    
+    document.getElementById('inrVal').innerText = (currentGratuityAED * liveRates.INR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " INR";
+    document.getElementById('nprVal').innerText = (currentGratuityAED * liveRates.NPR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " NPR";
+    document.getElementById('phpVal').innerText = (currentGratuityAED * liveRates.PHP).toLocaleString('en-US', {maximumFractionDigits: 0}) + " PHP";
+    document.getElementById('pkrVal').innerText = (currentGratuityAED * liveRates.PKR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " PKR";
+}
 
 function calculateGratuity() {
     let salary = parseFloat(document.getElementById('basicSalary').value);
@@ -171,20 +208,24 @@ function calculateGratuity() {
         totalGratuity = firstFiveYears + remainingYears;
     }
 
-    // Cap at 2 years total salary under UAE labor law
     let maxCap = salary * 24;
     if (totalGratuity > maxCap) totalGratuity = maxCap;
+
+    currentGratuityAED = totalGratuity;
 
     // Display AED Result
     document.getElementById('gratuityResult').innerText = totalGratuity.toLocaleString('en-US', {maximumFractionDigits: 2}) + " AED";
     document.getElementById('resultBox').style.display = "block";
 
-    // Update Home Currency Converted Values
-    document.getElementById('inrVal').innerText = (totalGratuity * rates.INR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " INR";
-    document.getElementById('nprVal').innerText = (totalGratuity * rates.NPR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " NPR";
-    document.getElementById('phpVal').innerText = (totalGratuity * rates.PHP).toLocaleString('en-US', {maximumFractionDigits: 0}) + " PHP";
-    document.getElementById('pkrVal').innerText = (totalGratuity * rates.PKR).toLocaleString('en-US', {maximumFractionDigits: 0}) + " PKR";
+    // Convert values with live rates
+    updateConvertedValues();
 }
+
+// Initial fetch on page load
+fetchLiveRates();
+
+// Refresh rates every 30 seconds automatically
+setInterval(fetchLiveRates, 30000);
 </script>
 
 </body>
