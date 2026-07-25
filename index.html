@@ -9,7 +9,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <title>AE UAE Gratuity Calculator & AI Resume Builder | Quick & Free</title>
+    <title>AE UAE Gratuity Calculator & Omiboy AI Resume Builder</title>
 
     <!-- Google AdSense Verification Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589818037936447"
@@ -106,7 +106,7 @@
             margin-top: 15px;
             padding: 12px;
             background: #f4f6f9;
-            border: 1.5px solid #2980b9;
+            border: 1.5px solid #8e44ad;
             border-radius: 8px;
             text-align: center;
         }
@@ -127,10 +127,10 @@
         }
         .career-btn {
             display: inline-block;
-            background: #2980b9;
+            background: #8e44ad;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 9px 18px;
             border-radius: 5px;
             font-size: 12px;
             font-weight: bold;
@@ -138,16 +138,16 @@
             transition: background 0.2s;
         }
         .career-btn:hover {
-            background: #1f638d;
+            background: #732d91;
         }
 
-        /* Modal Popup Styles for Resume Form */
+        /* Modal Popup Styles for Omiboy AI Wizard */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -155,39 +155,132 @@
         }
         .modal-content {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 480px;
+            padding: 22px;
+            border-radius: 12px;
+            max-width: 500px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         .close-modal {
             position: absolute;
             top: 12px; right: 15px;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             color: #888;
             cursor: pointer;
         }
-        .field-header {
+
+        /* Chat / Wizard Styling */
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f0fc;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #e8d0f5;
+            margin-bottom: 15px;
+        }
+        .ai-avatar {
+            width: 38px; height: 38px;
+            background: #8e44ad;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .ai-intro-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .ai-intro-sub {
+            font-size: 11px;
+            color: #7f8c8d;
+            margin-top: 2px;
+        }
+
+        .wizard-step { display: none; }
+        .wizard-step.active { display: block; }
+
+        .ai-msg-bubble {
+            background: #f4f6f8;
+            border-left: 3px solid #8e44ad;
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #333;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        /* Design Selection Cards */
+        .design-options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 12px 0;
+        }
+        .design-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fff;
+        }
+        .design-card:hover, .design-card.selected {
+            border-color: #8e44ad;
+            background: #fbf5fc;
+        }
+        .design-card-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .design-card-desc {
+            font-size: 10px;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        .wizard-nav-btns {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 15px;
         }
-        .ai-btn {
+        .btn-sec {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            width: auto;
+        }
+        .btn-pri {
             background: #8e44ad;
             color: white;
             border: none;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 10px;
+            padding: 8px 18px;
+            border-radius: 5px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
+            width: auto;
         }
-        .ai-btn:hover { background: #732d91; }
+        .btn-pri:hover { background: #732d91; }
 
         .faint-ad-links {
             display: flex;
@@ -236,49 +329,18 @@
             color: #333;
         }
         
-        /* Template Theme 1: Modern Executive (Default) */
-        .theme-modern .resume-header {
-            border-bottom: 3px solid #2980b9;
-            padding-bottom: 8px;
-            margin-bottom: 10px;
-        }
-        .theme-modern .resume-name {
-            font-size: 20px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .theme-modern .resume-section-title {
-            font-size: 12px;
-            font-weight: bold;
-            color: #2980b9;
-            text-transform: uppercase;
-            margin-top: 12px;
-            margin-bottom: 4px;
-            border-bottom: 1px solid #e2e8f0;
-        }
+        /* Template Themes */
+        .theme-modern .resume-header { border-bottom: 3px solid #2980b9; padding-bottom: 8px; margin-bottom: 10px; }
+        .theme-modern .resume-name { font-size: 20px; font-weight: bold; color: #2c3e50; }
+        .theme-modern .resume-section-title { font-size: 12px; font-weight: bold; color: #2980b9; text-transform: uppercase; margin-top: 12px; margin-bottom: 4px; border-bottom: 1px solid #e2e8f0; }
 
-        /* Template Theme 2: Minimalist Clean */
-        .theme-minimal .resume-header {
-            text-align: center;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
-        .theme-minimal .resume-name {
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: #111;
-        }
-        .theme-minimal .resume-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: #333;
-            text-transform: uppercase;
-            margin-top: 10px;
-            margin-bottom: 4px;
-            letter-spacing: 0.5px;
-        }
+        .theme-minimal .resume-header { text-align: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 10px; }
+        .theme-minimal .resume-name { font-size: 18px; font-weight: 600; letter-spacing: 1px; color: #111; }
+        .theme-minimal .resume-section-title { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; margin-top: 10px; margin-bottom: 4px; letter-spacing: 0.5px; }
+
+        .theme-creative .resume-header { border-left: 4px solid #8e44ad; padding-left: 10px; margin-bottom: 12px; }
+        .theme-creative .resume-name { font-size: 20px; font-weight: bold; color: #8e44ad; }
+        .theme-creative .resume-section-title { font-size: 12px; font-weight: bold; color: #8e44ad; margin-top: 12px; margin-bottom: 4px; border-bottom: 1.5px solid #8e44ad; }
     </style>
 </head>
 <body>
@@ -324,11 +386,11 @@
         </div>
     </a>
 
-    <!-- UAE Career & AI Native Resume Builder Card -->
+    <!-- UAE Career & Omiboy AI Resume Builder Card -->
     <div class="career-card">
-        <div class="career-title">📄 Planning Your Next Job Move in UAE?</div>
-        <p class="career-desc">Build & AI-enhance your ATS-friendly UAE resume instantly on this page.</p>
-        <button class="career-btn" onclick="openResumeModal()">✨ Build Resume with AI Assistance</button>
+        <div class="career-title">🤖 Build Resume with Omiboy AI</div>
+        <p class="career-desc">Let Omiboy AI ask you a few quick questions to format & polish your UAE ATS resume.</p>
+        <button class="career-btn" onclick="openResumeModal()">✨ Launch Omiboy AI Wizard</button>
     </div>
 
     <div class="faint-ad-links">
@@ -348,49 +410,107 @@
     </div>
 </div>
 
-<!-- Native AI-Enhanced Resume Builder Modal Form -->
+<!-- Interactive Omiboy AI Resume Wizard Modal -->
 <div class="modal-overlay" id="resumeModal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeResumeModal()">&times;</span>
-        <h3 style="margin-top:0; color:#2c3e50; font-size:18px;">📄 UAE Smart Resume Builder</h3>
-        <p style="font-size:11px; color:#666; margin-bottom:12px;">Fill out the fields or use AI auto-fill to generate a polished resume format.</p>
-
-        <label for="cvTemplate">Select PDF Layout Style</label>
-        <select id="cvTemplate">
-            <option value="modern">Modern Executive (Blue Headers & Accents)</option>
-            <option value="minimal">Minimalist Clean (Classic Monochrome)</option>
-        </select>
-
-        <label for="cvName">Full Name</label>
-        <input type="text" id="cvName" placeholder="e.g. Roshni Lama">
-
-        <label for="cvTitle">Target Job Title</label>
-        <input type="text" id="cvTitle" placeholder="e.g. Senior Retail Professional / Store Specialist">
-
-        <label for="cvContact">Contact Info</label>
-        <input type="text" id="cvContact" placeholder="e.g. +971 50 123 4567 | Dubai, UAE | email@domain.com">
-
-        <label for="cvVisa">Visa Status & Notice Period</label>
-        <input type="text" id="cvVisa" placeholder="e.g. Employment Visa (Cancelled / Serving Notice Period - 30 Days)">
-
-        <div class="field-header">
-            <label for="cvSummary" style="margin:0;">Professional Summary</label>
-            <button class="ai-btn" onclick="enhanceSummaryWithAI()">✨ AI Polish</button>
+        
+        <!-- AI Header Banner -->
+        <div class="ai-header">
+            <div class="ai-avatar">🤖</div>
+            <div>
+                <div class="ai-intro-title">Omiboy AI Assistant</div>
+                <div class="ai-intro-sub">Interactive UAE Resume Builder</div>
+            </div>
         </div>
-        <textarea id="cvSummary" placeholder="e.g. Experienced retail specialist with expertise in customer service, sales, and store operations..."></textarea>
 
-        <div class="field-header">
-            <label for="cvExperience" style="margin:0;">Work Experience Highlights</label>
-            <button class="ai-btn" onclick="enhanceExperienceWithAI()">✨ AI Enhance Bullets</button>
+        <!-- Step 1: Welcome & Design Style Selection -->
+        <div class="wizard-step active" id="step1">
+            <div class="ai-msg-bubble">
+                "Hello! 👋 I am <strong>Omiboy</strong>, and I will help you build your professional UAE resume step-by-step. <br><br>First, let's pick a design layout template for your CV:"
+            </div>
+
+            <div class="design-options-grid">
+                <div class="design-card selected" onclick="selectDesign('modern', this)">
+                    <div class="design-card-title">💼 Modern Executive</div>
+                    <div class="design-card-desc">Clean corporate style with blue header lines</div>
+                </div>
+                <div class="design-card" onclick="selectDesign('minimal', this)">
+                    <div class="design-card-title">📄 Minimalist Clean</div>
+                    <div class="design-card-desc">Sleek monochrome ATS-optimized format</div>
+                </div>
+                <div class="design-card" onclick="selectDesign('creative', this)">
+                    <div class="design-card-title">🎨 Creative Purple</div>
+                    <div class="design-card-desc">Stylish left accent panel for retail/beauty</div>
+                </div>
+            </div>
+
+            <div class="wizard-nav-btns" style="justify-content: flex-end;">
+                <button class="btn-pri" onclick="goToStep(2)">Next: Personal Info →</button>
+            </div>
         </div>
-        <textarea id="cvExperience" placeholder="e.g. Retail Specialist (2017 - Present) - Managed inventory, assisted customers, led retail promotions..."></textarea>
 
-        <label for="cvSkills">Key Skills</label>
-        <input type="text" id="cvSkills" placeholder="e.g. Customer Service, Inventory Management, POS Systems, Team Leadership">
+        <!-- Step 2: Basic Contact & UAE Visa Status -->
+        <div class="wizard-step" id="step2">
+            <div class="ai-msg-bubble">
+                "Great choice! Now, please share your contact info. (You can fill what you like or skip any field!)"
+            </div>
 
-        <button onclick="generateResumeDesign()" style="background:#8e44ad;">🚀 Generate & Format Resume</button>
+            <label for="cvName">What is your Full Name?</label>
+            <input type="text" id="cvName" placeholder="e.g. Roshni Lama">
 
-        <!-- Container for Output Preview -->
+            <label for="cvTitle">Your Target Job Title?</label>
+            <input type="text" id="cvTitle" placeholder="e.g. Senior Retail Professional / Store Specialist">
+
+            <label for="cvContact">Contact Info (Phone / Email / Location)</label>
+            <input type="text" id="cvContact" placeholder="e.g. +971 50 123 4567 | Dubai, UAE">
+
+            <label for="cvVisa">UAE Visa Status & Notice Period <span style="font-size:10px; color:#e67e22;">(Important in UAE)</span></label>
+            <input type="text" id="cvVisa" placeholder="e.g. Employment Visa (Cancelled / Serving Notice - 30 Days)">
+
+            <div class="wizard-nav-btns">
+                <button class="btn-sec" onclick="goToStep(1)">← Back</button>
+                <button class="btn-pri" onclick="goToStep(3)">Next: Work Experience →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Experience & Auto-Fill / Copy Paste -->
+        <div class="wizard-step" id="step3">
+            <div class="ai-msg-bubble">
+                "Awesome! Next is your work experience. Would you like to **copy-paste** your previous work duties or let me generate bullet points for you?"
+            </div>
+
+            <label for="cvExperience">Paste Your Experience / Key Responsibilities:</label>
+            <textarea id="cvExperience" placeholder="e.g. Worked at NYX Cosmetics / Retail Senior Specialist... Paste or type key duties here!"></textarea>
+            
+            <button class="career-btn" style="width:100%; margin-top:8px;" onclick="autoFillExperienceAI()">✨ Let Omiboy AI Auto-Fill / Polish Experience</button>
+
+            <div class="wizard-nav-btns">
+                <button class="btn-sec" onclick="goToStep(2)">← Back</button>
+                <button class="btn-pri" onclick="goToStep(4)">Next: Skills & Summary →</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Summary & Skills -->
+        <div class="wizard-step" id="step4">
+            <div class="ai-msg-bubble">
+                "Almost done! Let's add a short Professional Summary and your Key Skills."
+            </div>
+
+            <label for="cvSummary">Professional Summary:</label>
+            <textarea id="cvSummary" placeholder="Type a summary or click the AI button below..."></textarea>
+            <button class="career-btn" style="width:100%; margin-top:5px; margin-bottom:10px;" onclick="autoFillSummaryAI()">✨ Generate Summary with Omiboy AI</button>
+
+            <label for="cvSkills">Key Skills:</label>
+            <input type="text" id="cvSkills" placeholder="e.g. Customer Service, Inventory Management, POS Systems, Team Leadership">
+
+            <div class="wizard-nav-btns">
+                <button class="btn-sec" onclick="goToStep(3)">← Back</button>
+                <button class="btn-pri" style="background:#27ae60;" onclick="generateFinalCV()">🚀 Generate Final Resume Design</button>
+            </div>
+        </div>
+
+        <!-- Final Preview Area -->
         <div class="resume-preview-area theme-modern" id="resumePreview">
             <div class="resume-header">
                 <div class="resume-name" id="prevName"></div>
@@ -414,8 +534,12 @@
                 <div id="prevSkills"></div>
             </div>
 
-            <button onclick="window.print()" style="background:#27ae60; margin-top:15px;">🖨️ Print / Save as PDF</button>
+            <div style="display:flex; gap:10px; margin-top:15px;">
+                <button onclick="goToStep(1)" style="background:#95a5a6;">✏️ Edit Info</button>
+                <button onclick="window.print()" style="background:#27ae60;">🖨️ Save as PDF</button>
+            </div>
         </div>
+
     </div>
 </div>
 
@@ -429,6 +553,7 @@ let liveRates = {
 };
 
 let currentGratuityAED = 0;
+let selectedTemplateStyle = 'modern';
 
 async function fetchLiveRates() {
     try {
@@ -498,40 +623,48 @@ function calculateGratuity() {
     updateConvertedValues();
 }
 
-// Modal Open/Close
+// Wizard Step Navigation
 function openResumeModal() {
     document.getElementById('resumeModal').style.display = 'flex';
+    goToStep(1);
 }
 
 function closeResumeModal() {
     document.getElementById('resumeModal').style.display = 'none';
 }
 
-// AI Enhancer Helper Functions
-function enhanceSummaryWithAI() {
-    let text = document.getElementById('cvSummary').value.trim();
-    if (!text) {
-        document.getElementById('cvSummary').value = "Results-driven professional with extensive experience in the UAE market. Proven track record in operational efficiency, customer satisfaction, and team collaboration. Seeking to leverage strong industry skills in a dynamic new role.";
+function goToStep(stepNum) {
+    document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
+    document.getElementById('resumePreview').style.display = 'none';
+    document.getElementById('step' + stepNum).classList.add('active');
+}
+
+function selectDesign(styleName, element) {
+    selectedTemplateStyle = styleName;
+    document.querySelectorAll('.design-card').forEach(card => card.classList.remove('selected'));
+    element.classList.add('selected');
+}
+
+// AI Auto-Fill Functions
+function autoFillExperienceAI() {
+    let existing = document.getElementById('cvExperience').value.trim();
+    if (!existing) {
+        document.getElementById('cvExperience').value = "• Managed retail sales, customer consultations, and daily store operations.\n• Led inventory audits and POS transactional handling with high accuracy.\n• Provided high-standard customer service adhering to UAE market guidelines.";
     } else {
-        document.getElementById('cvSummary').value = "Accomplished and client-focused professional with proven expertise in " + text + ". Adept at driving customer engagement, optimizing operational workflows, and delivering high standards across UAE business environments.";
+        document.getElementById('cvExperience').value = "• Executed duties covering: " + existing + "\n• Streamlined customer satisfaction and resolved operational queries promptly.\n• Maintained compliance with company standards and UAE retail regulations.";
     }
 }
 
-function enhanceExperienceWithAI() {
-    let text = document.getElementById('cvExperience').value.trim();
-    if (!text) {
-        document.getElementById('cvExperience').value = "• Delivered exceptional service to high volumes of daily clients.\n• Managed daily stock reconciliation and inventory auditing.\n• Collaborated with cross-functional teams to meet monthly operational KPIs.";
-    } else {
-        document.getElementById('cvExperience').value = "• Executed daily responsibilities covering " + text + " with high accuracy.\n• Streamlined customer satisfaction metrics and resolved operational queries promptly.\n• Maintained compliance with company standards and UAE industry regulations.";
-    }
+function autoFillSummaryAI() {
+    let title = document.getElementById('cvTitle').value.trim() || "Retail Specialist";
+    document.getElementById('cvSummary').value = "Accomplished and results-driven " + title + " with extensive experience in the UAE market. Proven track record in operational efficiency, customer satisfaction, and team collaboration.";
 }
 
-// Generate Resume Layout
-function generateResumeDesign() {
-    let templateStyle = document.getElementById('cvTemplate').value;
+// Render Final CV
+function generateFinalCV() {
+    document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
     let previewArea = document.getElementById('resumePreview');
-    
-    previewArea.className = "resume-preview-area " + (templateStyle === 'minimal' ? 'theme-minimal' : 'theme-modern');
+    previewArea.className = "resume-preview-area theme-" + selectedTemplateStyle;
 
     let name = document.getElementById('cvName').value.trim() || "Applicant Name";
     let title = document.getElementById('cvTitle').value.trim() || "Professional";
