@@ -9,7 +9,8 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <title>AE UAE Gratuity Calculator | Quick & Free</title>
+    <title>UAE End of Service Gratuity Calculator 2026 | Official Labour Law Guide</title>
+    <meta name="description" content="Calculate your UAE End of Service Gratuity pay accurately under Federal Decree-Law No. 33 of 2021. Includes live currency exchange rates and legal guides.">
 
     <!-- Google AdSense Verification Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1589818037936447"
@@ -17,21 +18,26 @@
 
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; }
+        body { background-color: #f4f7f6; color: #2c3e50; margin: 0; padding: 20px 15px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         
+        .main-wrapper {
+            max-width: 600px;
+            width: 100%;
+        }
+
         .card { 
             background: white; 
             padding: 25px 25px 0px 25px; 
             border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-            max-width: 400px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
             width: 100%; 
             position: relative; 
             overflow: hidden; 
         }
 
-        h2 { text-align: center; color: #2c3e50; margin-top: 0; margin-bottom: 15px; font-size: 22px; }
-        
+        h1 { text-align: center; color: #2c3e50; margin-top: 0; margin-bottom: 5px; font-size: 22px; }
+        .subtitle { text-align: center; font-size: 12px; color: #7f8c8d; margin-bottom: 15px; }
+
         .label-container {
             display: flex;
             justify-content: space-between;
@@ -60,12 +66,12 @@
             background-color: #2980b9;
         }
 
-        input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
-        button { width: 100%; background: #27ae60; color: white; border: none; padding: 10px; font-size: 15px; font-weight: bold; border-radius: 6px; margin-top: 15px; cursor: pointer; }
+        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+        button { width: 100%; background: #27ae60; color: white; border: none; padding: 12px; font-size: 15px; font-weight: bold; border-radius: 6px; margin-top: 15px; cursor: pointer; }
         button:hover { background: #219150; }
         
-        .result-box { margin-top: 15px; padding: 10px; background: #e8f8f5; border: 1px solid #a3e4d7; border-radius: 6px; text-align: center; }
-        .result-amount { font-size: 22px; font-weight: bold; color: #27ae60; margin-top: 3px; }
+        .result-box { margin-top: 15px; padding: 12px; background: #e8f8f5; border: 1px solid #a3e4d7; border-radius: 6px; text-align: center; }
+        .result-amount { font-size: 24px; font-weight: bold; color: #27ae60; margin-top: 3px; }
 
         /* Compact Red Currency Box */
         .currency-box {
@@ -149,21 +155,12 @@
             background-color: #ebf5fb;
         }
 
-        .faint-ad-links {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 15px;
-            margin-bottom: 12px;
-            font-size: 11px;
-            color: #bdc3c7;
-        }
-
         /* Social Share Bar & Like Button */
         .social-share-container {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
             margin-bottom: 15px;
-            padding-top: 10px;
+            padding-top: 12px;
             border-top: 1px dashed #e0e0e0;
         }
         .social-share-label {
@@ -236,6 +233,39 @@
             100% { transform: translateX(-100%); }
         }
 
+        /* Articles & Guidance Section for AdSense Content Quality */
+        .article-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-size: 13px;
+            line-height: 1.6;
+            color: #34495e;
+        }
+        .article-section h2 {
+            text-align: left;
+            font-size: 17px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 6px;
+            margin-top: 20px;
+        }
+        .article-section h2:first-child { margin-top: 0; }
+        .article-section ul { padding-left: 20px; }
+        .article-section li { margin-bottom: 8px; }
+
+        /* Footer Links for Compliance */
+        footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 11px;
+            color: #95a5a6;
+            padding-bottom: 20px;
+        }
+        footer a { color: #7f8c8d; text-decoration: underline; margin: 0 8px; }
+
         /* Modal Overlay & Card Formatting */
         .modal-overlay {
             display: none;
@@ -278,142 +308,141 @@
             gap: 6px;
         }
         
-        /* Public Holidays Table / Card list */
-        .holiday-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .holiday-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 6px;
-            border-left: 3px solid #3498db;
-        }
-        .holiday-name {
-            font-size: 12px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .holiday-sub {
-            font-size: 10px;
-            color: #7f8c8d;
-            margin-top: 2px;
-        }
-        .holiday-date {
-            font-size: 11px;
-            font-weight: bold;
-            color: #27ae60;
-            text-align: right;
-            background: #e8f8f5;
-            padding: 3px 8px;
-            border-radius: 4px;
-            white-space: nowrap;
-        }
+        .holiday-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+        .holiday-item { display: flex; justify-content: space-between; align-items: center; background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 3px solid #3498db; }
+        .holiday-name { font-size: 12px; font-weight: bold; color: #2c3e50; }
+        .holiday-sub { font-size: 10px; color: #7f8c8d; margin-top: 2px; }
+        .holiday-date { font-size: 11px; font-weight: bold; color: #27ae60; text-align: right; background: #e8f8f5; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>🇦🇪 UAE Gratuity Calculator</h2>
-    
-    <div class="label-container">
-        <label for="basicSalary">Monthly Basic Salary (AED)</label>
-        <span class="info-icon" onclick="openInfoModal()" title="How is this calculated?">?</span>
-    </div>
-    <input type="number" id="basicSalary" placeholder="e.g. 8000">
-
-    <div class="label-container">
-        <label for="years">Years of Service</label>
-    </div>
-    <input type="number" id="years" placeholder="e.g. 3.5" step="0.1">
-
-    <button onclick="calculateGratuity()">Calculate Estimate</button>
-
-    <div class="result-box" id="resultBox" style="display:none;">
-        <div style="font-size: 13px;">Estimated Gratuity Pay:</div>
-        <div class="result-amount" id="gratuityResult">0 AED</div>
-    </div>
-
-    <!-- Live Currency Rate Box -->
-    <a href="https://omiboy4u.github.io/UAE-Currency-Gold-Converter/" class="currency-box">
-        <div class="currency-main-text">
-            <span>🔀</span> Check Today's Live Currency Rates!
+<div class="main-wrapper">
+    <div class="card">
+        <h1>🇦🇪 UAE Gratuity Calculator</h1>
+        <div class="subtitle">Updated according to UAE Labour Law Decree-Law No. 33 of 2021</div>
+        
+        <div class="label-container">
+            <label for="basicSalary">Monthly Basic Salary (AED)</label>
+            <span class="info-icon" onclick="openInfoModal()" title="How is this calculated?">?</span>
         </div>
-        <div class="rate-grid">
-            <div class="rate-card">
-                <div class="rate-info">🇮🇳 INR: <span id="inrRate">26.29</span> <span id="inrArrow" class="rate-up">↑</span></div>
-                <div class="converted-val" id="inrVal">1 AED = 26.29 INR</div>
+        <input type="number" id="basicSalary" placeholder="e.g. 8000">
+
+        <div class="label-container">
+            <label for="years">Years of Service</label>
+        </div>
+        <input type="number" id="years" placeholder="e.g. 3.5" step="0.1">
+
+        <button onclick="calculateGratuity()">Calculate Estimate</button>
+
+        <div class="result-box" id="resultBox" style="display:none;">
+            <div style="font-size: 13px;">Estimated Gratuity Pay:</div>
+            <div class="result-amount" id="gratuityResult">0 AED</div>
+        </div>
+
+        <!-- Live Currency Rate Box -->
+        <a href="https://omiboy4u.github.io/UAE-Currency-Gold-Converter/" class="currency-box">
+            <div class="currency-main-text">
+                <span>🔀</span> Check Today's Live Currency Rates!
             </div>
-            <div class="rate-card">
-                <div class="rate-info">🇳🇵 NPR: <span id="nprRate">42.03</span> <span id="nprArrow" class="rate-down">↓</span></div>
-                <div class="converted-val" id="nprVal">1 AED = 42.03 NPR</div>
+            <div class="rate-grid">
+                <div class="rate-card">
+                    <div class="rate-info">🇮🇳 INR: <span id="inrRate">26.29</span> <span id="inrArrow" class="rate-up">↑</span></div>
+                    <div class="converted-val" id="inrVal">1 AED = 26.29 INR</div>
+                </div>
+                <div class="rate-card">
+                    <div class="rate-info">🇳🇵 NPR: <span id="nprRate">42.03</span> <span id="nprArrow" class="rate-down">↓</span></div>
+                    <div class="converted-val" id="nprVal">1 AED = 42.03 NPR</div>
+                </div>
+                <div class="rate-card">
+                    <div class="rate-info">🇵🇭 PHP: <span id="phpRate">16.79</span> <span id="phpArrow" class="rate-up">↑</span></div>
+                    <div class="converted-val" id="phpVal">1 AED = 16.84 PHP</div>
+                </div>
+                <div class="rate-card">
+                    <div class="rate-info">🇵🇰 PKR: <span id="pkrRate">75.65</span> <span id="pkrArrow" class="rate-up">↑</span></div>
+                    <div class="converted-val" id="pkrVal">1 AED = 75.65 PKR</div>
+                </div>
             </div>
-            <div class="rate-card">
-                <div class="rate-info">🇵🇭 PHP: <span id="phpRate">16.79</span> <span id="phpArrow" class="rate-up">↑</span></div>
-                <div class="converted-val" id="phpVal">1 AED = 16.79 PHP</div>
-            </div>
-            <div class="rate-card">
-                <div class="rate-info">🇵🇰 PKR: <span id="pkrRate">75.65</span> <span id="pkrArrow" class="rate-up">↑</span></div>
-                <div class="converted-val" id="pkrVal">1 AED = 75.65 PKR</div>
+        </a>
+
+        <!-- UAE Public Holidays Button Card -->
+        <div class="holiday-btn-card" onclick="openHolidayModal()">
+            <span>🌴 View UAE Public Holidays 2026</span>
+        </div>
+
+        <!-- Social Share Buttons & Real-time Like Counter -->
+        <div class="social-share-container">
+            <div class="social-share-label">Like & Share this calculator:</div>
+            <div class="social-share-btns">
+                <!-- Global Real-Time Like Button -->
+                <button id="likeBtn" onclick="registerGlobalLike()" class="social-btn btn-like">
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span id="likeText">Like</span> (<span id="likeCount">...</span>)
+                </button>
+
+                <!-- WhatsApp -->
+                <a href="https://api.whatsapp.com/send?text=Calculate%20your%20UAE%20End-of-Service%20Gratuity%20easily%20and%20check%20live%20currency%20rates:%20https://omiboy4u.github.io/UAE-Gratuity-Calculator-2026/" target="_blank" class="social-btn btn-whatsapp">
+                    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    WhatsApp
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://omiboy4u.github.io/UAE-Gratuity-Calculator-2026/" target="_blank" class="social-btn btn-facebook">
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/" target="_blank" onclick="alert('Link copied to clipboard! Share it in your Instagram stories or bio.')" class="social-btn btn-instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.271-4.919 5.419-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.271 4.919-5.419 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    Instagram
+                </a>
             </div>
         </div>
-    </a>
 
-    <!-- UAE Public Holidays Button Card -->
-    <div class="holiday-btn-card" onclick="openHolidayModal()">
-        <span>🌴 View UAE Public Holidays 2026</span>
-    </div>
-
-    <div class="faint-ad-links">
-        <span>Sponsored</span>
-        <span>Advertise Here</span>
-        <span>Related Services</span>
-    </div>
-
-    <!-- Social Share Buttons & Real-time Like Counter -->
-    <div class="social-share-container">
-        <div class="social-share-label">Like & Share this calculator:</div>
-        <div class="social-share-btns">
-            <!-- Global Real-Time Like Button -->
-            <button id="likeBtn" onclick="registerGlobalLike()" class="social-btn btn-like">
-                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <span id="likeText">Like</span> (<span id="likeCount">...</span>)
-            </button>
-
-            <!-- WhatsApp -->
-            <a href="https://api.whatsapp.com/send?text=Calculate%20your%20UAE%20End-of-Service%20Gratuity%20easily%20and%20check%20live%20currency%20rates:%20https://omiboy4u.github.io/UAE-Gratuity-Calculator-2026/" target="_blank" class="social-btn btn-whatsapp">
-                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                WhatsApp
-            </a>
-
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://omiboy4u.github.io/UAE-Gratuity-Calculator-2026/" target="_blank" class="social-btn btn-facebook">
-                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                Facebook
-            </a>
-
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/" target="_blank" onclick="alert('Link copied to clipboard! Share it in your Instagram stories or bio.')" class="social-btn btn-instagram">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.271-4.919 5.419-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.271 4.919-5.419 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                Instagram
-            </a>
-        </div>
-    </div>
-
-    <!-- Moving Gold Ticker at Very Bottom Edge -->
-    <div class="gold-footer-ticker">
-        <div class="gold-ticker-content">
-            <span>✨ 22k Gold Rate - 452.25 AED</span>
-            <span>🏆 24k Gold Rate - 488.50 AED</span>
-            <span>✨ 22k Gold Rate - 452.25 AED</span>
-            <span>🏆 24k Gold Rate - 488.50 AED</span>
+        <!-- Moving Gold Ticker at Very Bottom Edge -->
+        <div class="gold-footer-ticker">
+            <div class="gold-ticker-content">
+                <span>✨ 22k Gold Rate - 452.25 AED</span>
+                <span>🏆 24k Gold Rate - 488.50 AED</span>
+                <span>✨ 22k Gold Rate - 452.25 AED</span>
+                <span>🏆 24k Gold Rate - 488.50 AED</span>
+            </div>
         </div>
     </div>
+
+    <!-- Educational Content Section to Pass Google AdSense Low-Value Content Policy -->
+    <div class="article-section">
+        <h2>Understanding UAE End of Service Gratuity (ESG)</h2>
+        <p>End of Service Gratuity (ESG) is a monetary payout provided to employees who complete their employment contracts in the United Arab Emirates. Under <strong>Federal Decree-Law No. 33 of 2021</strong>, gratuity calculation rules apply equally across private sector entities in all emirates.</p>
+
+        <h2>How Gratuity is Calculated in the UAE</h2>
+        <p>Gratuity is computed strictly using your <strong>Monthly Basic Salary</strong>. Allowances for housing, transport, utilities, or bonuses are excluded from this baseline.</p>
+
+        <ul>
+            <li><strong>Daily Basic Salary Formula:</strong> Monthly Basic Salary ÷ 30 days.</li>
+            <li><strong>1 to 5 Years of Service:</strong> Entitled to 21 days' basic salary for each completed year.</li>
+            <li><strong>Above 5 Years of Service:</strong> Entitled to 30 days' basic salary for each additional year beyond 5 years.</li>
+            <li><strong>Maximum Legal Limit:</strong> Total gratuity cannot exceed 2 years' (24 months') total basic salary.</li>
+        </ul>
+
+        <h2>Eligibility Criteria for Gratuity Pay</h2>
+        <p>To qualify for End of Service Gratuity in the UAE private sector:</p>
+        <ul>
+            <li>An employee must complete at least 1 full year (12 continuous months) of service.</li>
+            <li>Unpaid leave days are deducted when calculating total service length.</li>
+            <li>Under current regulations, there is no longer a distinction between limited and unlimited contracts, as all employees transition under standard fixed-term agreements.</li>
+        </ul>
+    </div>
+
+    <!-- Mandatory Footer Links for AdSense Compliance -->
+    <footer>
+        <div>© 2026 UAE Gratuity Calculator. All rights reserved.</div>
+        <div style="margin-top: 5px;">
+            <a href="#" onclick="alert('Privacy Policy: We do not store or track any personal financial or salary information entered into this calculator.')">Privacy Policy</a> | 
+            <a href="#" onclick="alert('Terms of Service: This calculator provides estimated calculations based on UAE Labour Law Federal Decree-Law No. 33 of 2021 for informational purposes only.')">Terms of Use</a>
+        </div>
+    </footer>
 </div>
 
 <!-- How Gratuity is Calculated Info Modal -->
@@ -527,21 +556,10 @@ let liveRates = {
 let currentGratuityAED = 0;
 
 // Modal Handlers
-function openInfoModal() {
-    document.getElementById('infoModal').style.display = 'flex';
-}
-
-function closeInfoModal() {
-    document.getElementById('infoModal').style.display = 'none';
-}
-
-function openHolidayModal() {
-    document.getElementById('holidayModal').style.display = 'flex';
-}
-
-function closeHolidayModal() {
-    document.getElementById('holidayModal').style.display = 'none';
-}
+function openInfoModal() { document.getElementById('infoModal').style.display = 'flex'; }
+function closeInfoModal() { document.getElementById('infoModal').style.display = 'none'; }
+function openHolidayModal() { document.getElementById('holidayModal').style.display = 'flex'; }
+function closeHolidayModal() { document.getElementById('holidayModal').style.display = 'none'; }
 
 // Global Real-time Like Counter Handler using CountAPI
 async function fetchGlobalLikes() {
@@ -596,7 +614,6 @@ async function registerGlobalLike() {
 async function fetchLiveRates() {
     let success = false;
 
-    // Primary Source: ExchangeRate-API
     try {
         const response = await fetch('https://open.er-api.com/v6/latest/AED');
         const data = await response.json();
@@ -612,7 +629,6 @@ async function fetchLiveRates() {
         console.log("Primary exchange rate API unavailable, trying fallback source...");
     }
 
-    // Secondary Fallback Source: Fawaz Ahmed Currency API
     if (!success) {
         try {
             const fallbackRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/aed.json');
@@ -629,7 +645,6 @@ async function fetchLiveRates() {
         }
     }
 
-    // Render rates in HTML
     document.getElementById('inrRate').innerText = liveRates.INR.toFixed(2);
     document.getElementById('nprRate').innerText = liveRates.NPR.toFixed(2);
     document.getElementById('phpRate').innerText = liveRates.PHP.toFixed(2);
