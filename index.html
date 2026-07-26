@@ -346,8 +346,8 @@
         </div>
         <div class="rate-grid">
             <div class="rate-card">
-                <div class="rate-info">🇮🇳 INR: <span id="inrRate">26.25</span> <span id="inrArrow" class="rate-up">↑</span></div>
-                <div class="converted-val" id="inrVal">1 AED = 26.25 INR</div>
+                <div class="rate-info">🇮🇳 INR: <span id="inrRate">26.29</span> <span id="inrArrow" class="rate-up">↑</span></div>
+                <div class="converted-val" id="inrVal">1 AED = 26.29 INR</div>
             </div>
             <div class="rate-card">
                 <div class="rate-info">🇳🇵 NPR: <span id="nprRate">42.03</span> <span id="nprArrow" class="rate-down">↓</span></div>
@@ -516,9 +516,9 @@
 const counterNamespace = "omiboy4u_uae_gratuity_calc_2026";
 const counterKey = "likes";
 
-// Baseline live values
+// Baseline live market rates
 let liveRates = {
-    INR: 26.25,
+    INR: 26.29,
     NPR: 42.03,
     PHP: 16.79,
     PKR: 75.65
@@ -592,27 +592,50 @@ async function registerGlobalLike() {
     }
 }
 
+// Multi-Source Real-Time Currency Rate Fetcher
 async function fetchLiveRates() {
+    let success = false;
+
+    // Primary Source: ExchangeRate-API
     try {
         const response = await fetch('https://open.er-api.com/v6/latest/AED');
         const data = await response.json();
         
-        if (data && data.rates) {
+        if (data && data.rates && data.rates.INR) {
             liveRates.INR = data.rates.INR;
             liveRates.NPR = data.rates.NPR;
             liveRates.PHP = data.rates.PHP;
             liveRates.PKR = data.rates.PKR;
-
-            document.getElementById('inrRate').innerText = liveRates.INR.toFixed(2);
-            document.getElementById('nprRate').innerText = liveRates.NPR.toFixed(2);
-            document.getElementById('phpRate').innerText = liveRates.PHP.toFixed(2);
-            document.getElementById('pkrRate').innerText = liveRates.PKR.toFixed(2);
-
-            updateConvertedValues();
+            success = true;
         }
     } catch (error) {
-        console.log("Using current baseline market rates.");
+        console.log("Primary exchange rate API unavailable, trying fallback source...");
     }
+
+    // Secondary Fallback Source: Fawaz Ahmed Currency API
+    if (!success) {
+        try {
+            const fallbackRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/aed.json');
+            const fallbackData = await fallbackRes.json();
+            if (fallbackData && fallbackData.aed) {
+                liveRates.INR = fallbackData.aed.inr;
+                liveRates.NPR = fallbackData.aed.npr;
+                liveRates.PHP = fallbackData.aed.php;
+                liveRates.PKR = fallbackData.aed.pkr;
+                success = true;
+            }
+        } catch (err) {
+            console.log("Using primary baseline market rate.");
+        }
+    }
+
+    // Render rates in HTML
+    document.getElementById('inrRate').innerText = liveRates.INR.toFixed(2);
+    document.getElementById('nprRate').innerText = liveRates.NPR.toFixed(2);
+    document.getElementById('phpRate').innerText = liveRates.PHP.toFixed(2);
+    document.getElementById('pkrRate').innerText = liveRates.PKR.toFixed(2);
+
+    updateConvertedValues();
 }
 
 function updateConvertedValues() {
@@ -664,7 +687,7 @@ function calculateGratuity() {
 fetchGlobalLikes();
 fetchLiveRates();
 
-// Refresh rates automatically every 30 seconds
+// Refresh live exchange rates every 30 seconds
 setInterval(fetchLiveRates, 30000);
 </script>
 
