@@ -155,6 +155,31 @@
             background-color: #ebf5fb;
         }
 
+        /* Lost & Found Hub Card Button */
+        .lost-found-btn-card {
+            margin-top: 10px;
+            background: #ffffff;
+            border: 1.5px solid #4f46e5;
+            color: #4f46e5;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .lost-found-btn-card:hover {
+            background-color: #f5f3ff;
+            border-color: #4338ca;
+            color: #4338ca;
+        }
+
         /* Social Share Bar & Like Button */
         .social-share-container {
             text-align: center;
@@ -309,7 +334,7 @@
         }
         
         .holiday-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-        .holiday-item { display: flex; justify-content: space-between; align-items: center; background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 3px solid #3498db; }
+        .holiday-item { display: flex; justify-between: space-between; align-items: center; background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 3px solid #3498db; }
         .holiday-name { font-size: 12px; font-weight: bold; color: #2c3e50; }
         .holiday-sub { font-size: 10px; color: #7f8c8d; margin-top: 2px; }
         .holiday-date { font-size: 11px; font-weight: bold; color: #27ae60; text-align: right; background: #e8f8f5; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
@@ -369,6 +394,11 @@
         <div class="holiday-btn-card" onclick="openHolidayModal()">
             <span>🌴 View UAE Public Holidays 2026</span>
         </div>
+
+        <!-- Lost & Found Portal Button Card -->
+        <a href="https://omiboy4u.github.io/lost-and-found-hub/" target="_blank" class="lost-found-btn-card">
+            <span>🔍 Visit Community Lost & Found Hub</span>
+        </a>
 
         <!-- Social Share Buttons & Real-time Like Counter -->
         <div class="social-share-container">
